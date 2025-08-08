@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "testLogin": "cucumber-js --tags='@login'",
-    "testCreateOrg": "cucumber-js --tags='@createOrg'",
+    "test:login": "cucumber-js --tags='@login'",
+    "test:createOrg": "cucumber-js --tags='@createOrg'",
     "test": "cucumber-js"
   },
   "keywords": [],
@@ -14,11 +14,13 @@
   "devDependencies": {
     "@playwright/test": "^1.54.2",
     "@types/node": "^24.2.0",
+    "@types/randomstring": "^1.3.0",
     "multiple-cucumber-html-reporter": "^3.9.3"
   },
   "dependencies": {
     "@cucumber/cucumber": "^12.1.0",
     "dotenv": "^17.2.1",
+    "randomstring": "^1.3.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   }

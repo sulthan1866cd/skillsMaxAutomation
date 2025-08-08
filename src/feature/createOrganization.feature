@@ -8,7 +8,7 @@ Feature: create new organization
     And clicked create button
     Then organization name is required message should be shown
 
-  @createNewOrg
+  @createOrg
   Scenario: user successfully creates new organization
     Given user is in organization tab
     When user clicks Create Organization button to open create organization side bar

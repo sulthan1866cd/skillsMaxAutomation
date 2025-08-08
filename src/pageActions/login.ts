@@ -1,23 +1,21 @@
-import { getPage } from "../hooks";
+import utility from "../utils/utility";
 
 class LoginPageActions {
   constructor() {}
   gotoLoginPage = async () => {
-    await getPage().goto("https://sandbox.skillsmax.ai/", {
-      waitUntil: "domcontentloaded",
-    });
+    await utility.goToURL('https://sandbox.skillsmax.ai/')
   };
 
   fillEmail = async (email: string) => {
-    await getPage().getByPlaceholder("Email").fill(email);
+    await utility.fillText('//input[@placeholder="Email"]',email)
   };
 
   fillPassword = async (password: string) => {
-    await getPage().getByPlaceholder("Password").fill(password);
+    await utility.fillText('//input[@placeholder="Password"]',password);
   };
 
   clickLoginButton = async () => {
-    await getPage().getByRole("button", { name: "Login" }).click();
+    await utility.click('//button[text()="Login"]');
   };
 }
 
