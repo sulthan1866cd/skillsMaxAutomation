@@ -5,7 +5,7 @@ Automated testing for skillsmax's login, create Organization feature
 ## Table of Contents
 - [Usage](#usage)
 - [Tech Used](#tech-used)
-- [Feautre](#features)
+- [Feautres](#features)
 
 ## Usage
 ```shell
@@ -37,6 +37,10 @@ npm run test
 - successful organization creation
 - unsuccessful organization creation without filling required field
 - unsuccessful organization creation without checking assessment levels
+
+### Create Users
+- sucessful users creation
+- unsucessful user creation with duplicates in email
 
 ## .env
 - MY_MAIL='your.registered@mail.com'
