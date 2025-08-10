@@ -23,14 +23,20 @@ npm run test
 - cucumber js - ^12.1.0
 - ts-node - ^10.9.2
 - typescript - "^5.9.2
+- multiple-cucumber-html-reporter - "^3.9.3"
+
 
 
 ## Features
 ### Login 
-- successfull login and unsuccessful login with wrong password are tested
+- successfull login 
+- unsuccessful login with wrong credentials
+- unsuccessful login with wrong email format
 
 ### Create Organization
-- leave one required field empty and successful organization creation are tested
+- successful organization creation
+- unsuccessful organization creation without filling required field
+- unsuccessful organization creation without checking assessment levels
 
 ## .env
 - MY_MAIL='your.registered@mail.com'
