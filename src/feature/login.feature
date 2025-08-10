@@ -9,9 +9,44 @@ Feature: login to skillsmax
     Then user should be redirected to dashboard page
 
   @login
-  Scenario: user enters wrong password
+  Scenario Outline: user enters wrong credentials
     Given user is in login page
-    When user enters email id
-    And user enters wrong password
+    When user enters <email> in "Email" field
+    And user enters <password> in "Password" field
     And user clicks login button
     Then "Incorrect email or password" message should be shown
+
+    Examples:
+      | email             | password |
+      | "wrong@mail.com"  | "pass"   |
+      | "sulthn@gmail.in" | "qwerty" |
+
+  @login
+  Scenario Outline: user leaves password field empty
+    Given user is in login page
+    When user enters <value> in <field> field
+    And user clicks login button
+    Then "<other field> is required<dot>" message should be shown
+
+    Examples:
+      | value          | field      | other field | dot |
+      | "wrongmail.in" | "Emai"     | Password    | .   |
+      | "sulthn@gmail" | "Emil"     | Password    | .   |
+      | "qwerty"       | "Password" | Email       |     |
+      | "password"     | "Password" | Email       |     |
+    # email is required message dosent end with dot
+
+  @login
+  Scenario Outline: user enters wrong email format
+    Given user is in login page
+    When user enters <email> in "Email" field
+    And user enters <password> in "Password" field
+    And user clicks login button
+    Then "*Please enter a valid email address." message should be shown
+
+    Examples:
+      | email          | password              |
+      | "wrongmail.in" | "pass"                |
+      | "sulthn@gmail" | "qwerty"              |
+      | "mail@.in"     | ""                    |
+      | "my mail"      | "my secure password " |

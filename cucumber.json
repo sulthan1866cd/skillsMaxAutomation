@@ -5,7 +5,10 @@
     },
     "dryRun": false,
     "paths": ["src/feature/*.feature"],
-    "require": ["src/stepDefinition/*.ts","src/hooks.ts"],
-    "requireModule": ["ts-node/register"]
+    "require": ["src/stepDefinition/*.ts", "src/hooks.ts"],
+    "requireModule": ["ts-node/register"],
+    "format": [
+      "json:test-results/report.json"
+    ]
   }
 }
