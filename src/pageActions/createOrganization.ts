@@ -1,3 +1,5 @@
+import assesmentLevels from "../interface/assesmentLevels.interface";
+import assessmentTypes from "../interface/assesmentTypes.interface";
 import utility from "../utils/utility";
 
 class CreateOrganization {
@@ -74,11 +76,7 @@ class CreateOrganization {
     );
   };
 
-  fillAssessmentTypes = async (assessmentTypes: {
-    apptitude?: number;
-    communication?: number;
-    coding?: number;
-  }) => {
+  fillAssessmentTypes = async (assessmentTypes: assessmentTypes) => {
     const { apptitude, communication, coding } = assessmentTypes;
     if (apptitude) {
       await this.checkLicensing("Aptitude+");
@@ -94,11 +92,7 @@ class CreateOrganization {
     }
   };
 
-  checkAssessmentLevels = async (assessmentLevels: {
-    practice?: boolean;
-    graded?: boolean;
-    interview?: boolean;
-  }) => {
+  checkAssessmentLevels = async (assessmentLevels: assesmentLevels) => {
     const { practice, graded, interview } = assessmentLevels;
     if (practice) await this.checkLicensing("Practice");
     if (graded) await this.checkLicensing("Graded");

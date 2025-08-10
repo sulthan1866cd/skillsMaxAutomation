@@ -5,8 +5,28 @@ import { configDotenv } from "dotenv";
 import createOrganization from "../pageActions/createOrganization";
 import utility from "../utils/utility";
 import randomstring from "randomstring";
+import assesmentLevels from "../interface/assesmentLevels.interface";
+import assessmentTypes from "../interface/assesmentTypes.interface";
 
 configDotenv();
+const organizationName: string = `Organization_${randomstring.generate({
+  length: 5,
+})}`;
+const address: string = `Address_${randomstring.generate({ length: 5 })}`;
+const countryIndex: number = 0;
+const stateIndex: number = 3;
+const cityIndex: number = 5;
+const assesmentTypes: assessmentTypes = {
+  apptitude: 1,
+  communication: 2,
+  coding: 3,
+};
+const assesmentLevels: assesmentLevels = {
+  practice: true,
+  interview: true,
+};
+
+const pin: string = randomstring.generate({ charset: "numeric", length: 6 });
 
 Given("user is in organization tab", async () => {
   await createOrganization.login();
@@ -23,53 +43,67 @@ When(
 );
 
 When(
-  `user didn't fill organization name field and user fills other fields`,
-  async () => {
-    await createOrganization.fillAddress("23,a st, city,country");
-    await createOrganization.selectCountry(0);
-    await createOrganization.selectState(2);
-    await createOrganization.selectCity(1);
-    await createOrganization.fillPin("432156");
-    await createOrganization.fillAssessmentTypes({
-      apptitude: 1,
-      communication: 2,
-      coding: 3,
-    });
-    await createOrganization.checkAssessmentLevels({
-      practice: true,
-      graded: true,
-      interview: true,
-    });
+  "user didn't fill {string} field and user fills other fields",
+  async (
+    field:
+      | "Organisation Name"
+      | "Address"
+      | "Country"
+      | "State"
+      | "Pin Code"
+      | "City"
+  ) => {
+    if (field !== "Organisation Name")
+      await createOrganization.fillOrganizationName(organizationName);
+    if (field !== "Address") await createOrganization.fillAddress(address);
+    if (field !== "Country")
+      await createOrganization.selectCountry(countryIndex);
+    if (field !== "Country" && field !== "State")
+      await createOrganization.selectState(stateIndex);
+    if (field !== "Country" && field !== "State" && field !== "City")
+      await createOrganization.selectCity(cityIndex);
+    if (field !== "Pin Code") await createOrganization.fillPin(pin);
+    await createOrganization.fillAssessmentTypes(assesmentTypes);
+    await createOrganization.checkAssessmentLevels(assesmentLevels);
   }
 );
 
-When("clicked create button", async () => {
+When("user clicks create button", async () => {
   await createOrganization.clickCreateButton();
 });
 
-Then("organization name is required message should be shown", async () => {
-  await expect(
-    utility.getElement('//div[text()="Organisation Name is required"]')
-  ).toBeVisible();
-});
+Then(
+  "{string} message should be shown -createOrg",
+  async (message: string) => {
+    await expect(
+      utility.getElement(`//div[text()="${message}"]`)
+    ).toBeVisible();
+  }
+);
 
-const organizationName = `Organization_${randomstring.generate({ length: 5 })}`;
 When("user fills all the manditory fields", async () => {
   await createOrganization.fillOrganizationName(organizationName);
-  await createOrganization.fillAddress("23,a st, city,country");
-  await createOrganization.selectCountry(0);
-  await createOrganization.selectState(3);
-  await createOrganization.selectCity(5);
-  await createOrganization.fillPin("432156");
-  await createOrganization.checkAssessmentLevels({
-    practice: true,
-    interview: true,
-  });
-  await createOrganization.fillAssessmentTypes({
-    communication: 2,
-    coding: 7,
-  });
+  await createOrganization.fillAddress(address);
+  await createOrganization.selectCountry(countryIndex);
+  await createOrganization.selectState(stateIndex);
+  await createOrganization.selectCity(cityIndex);
+  await createOrganization.fillPin(pin);
+  await createOrganization.fillAssessmentTypes(assesmentTypes);
+  await createOrganization.checkAssessmentLevels(assesmentLevels);
 });
+
+When(
+  "user check any Assessment Level checkbox and user fills other fields",
+  async () => {
+    await createOrganization.fillOrganizationName(organizationName);
+    await createOrganization.fillAddress(address);
+    await createOrganization.selectCountry(countryIndex);
+    await createOrganization.selectState(stateIndex);
+    await createOrganization.selectCity(cityIndex);
+    await createOrganization.fillPin(pin);
+    await createOrganization.fillAssessmentTypes(assesmentTypes);
+  }
+);
 
 Then("organization name should be visibel on organization table", async () => {
   await expect(

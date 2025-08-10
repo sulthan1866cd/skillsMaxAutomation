@@ -20,22 +20,23 @@ When("user clicks login button", async () => {
   await loginPageAction.clickLoginButton();
 });
 Then("user should be redirected to dashboard page", async () => {
-  await expect(utility.getElement('//p[text()="dashboard"]')).toBeVisible({
-    timeout: 30000,
-  });
+  const dashboardLink = utility.getElement('//p[text()="dashboard"]');
+  await dashboardLink.waitFor({ state: "visible" });
+  await expect(dashboardLink).toBeVisible();
   console.log("user is redirected to dashboard");
 });
 
-When("user enters email id", async () => {
-  await loginPageAction.fillEmail("sulthan.@mail.com");
-});
+When(
+  "user enters {string} in {string} field",
+  async (value: string, field: "Email" | "Password") => {
+    if (field === "Email") {
+      await loginPageAction.fillEmail(value);
+    } else if (field === "Password") {
+      await loginPageAction.fillPassword(value);
+    }
+  }
+);
 
-When("user enters wrong password", async () => {
-  await loginPageAction.fillPassword("password");
-});
-
-Then('"Incorrect email or password" message should be shown', async () => {
-  await expect(
-    utility.getElement('//p[text()="Incorrect email or password"]')
-  ).toBeVisible();
+Then("{string} message should be shown", async (message: string) => {
+  await expect(utility.getElement(`//p[text()="${message}"]`)).toBeVisible();
 });

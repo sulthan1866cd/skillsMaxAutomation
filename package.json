@@ -5,7 +5,8 @@
   "scripts": {
     "test:login": "cucumber-js --tags='@login'",
     "test:createOrg": "cucumber-js --tags='@createOrg'",
-    "test": "cucumber-js"
+    "test": "cucumber-js",
+    "report":"ts-node htmlReport.ts"
   },
   "keywords": [],
   "author": "",
