@@ -29,7 +29,7 @@ const assesmentLevels: assesmentLevels = {
 const pin: string = randomstring.generate({ charset: "numeric", length: 6 });
 
 Given("user is in organization tab", async () => {
-  await createOrganization.login();
+  await utility.login();
   console.log("redirected to dashboard page");
   await createOrganization.switchToOrganizationTab();
   console.log("user in organization tab");
@@ -39,6 +39,7 @@ When(
   "user clicks Create Organization button to open create organization side bar",
   async () => {
     await createOrganization.openCreateOrganizationSideBar();
+    console.log("in create organization sidebar");
   }
 );
 
@@ -72,14 +73,9 @@ When("user clicks create button", async () => {
   await createOrganization.clickCreateButton();
 });
 
-Then(
-  "{string} message should be shown -createOrg",
-  async (message: string) => {
-    await expect(
-      utility.getElement(`//div[text()="${message}"]`)
-    ).toBeVisible();
-  }
-);
+Then("{string} message should be shown -createOrg", async (message: string) => {
+  await expect(utility.getElement(`//div[text()="${message}"]`)).toBeVisible();
+});
 
 When("user fills all the manditory fields", async () => {
   await createOrganization.fillOrganizationName(organizationName);

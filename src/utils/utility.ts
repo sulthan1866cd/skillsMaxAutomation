@@ -3,6 +3,16 @@ import { getPage } from "../hooks";
 
 class Utility {
   constructor() {}
+  login = async () => {
+    await this.goToURL("https://sandbox.skillsmax.ai/");
+
+    await this.fillText('//input[@placeholder="Email"]', process.env.MY_MAIL);
+    await this.fillText(
+      '//input[@placeholder="Password"]',
+      process.env.MY_PASSWORD
+    );
+    await this.click('//button[text()="Login"]');
+  };
 
   goToURL = async (url: string) => {
     await getPage().goto(url, { waitUntil: "domcontentloaded" });
@@ -30,8 +40,8 @@ class Utility {
   click = async (button: string | Locator) => {
     const buttonElement =
       typeof button === "string" ? getPage().locator(button) : button;
-   await buttonElement.waitFor({ state: "visible" });
-   await buttonElement.click();
+    await buttonElement.waitFor({ state: "visible" });
+    await buttonElement.click();
   };
 
   check = async (checkbox: string | Locator) => {
@@ -47,7 +57,13 @@ class Utility {
     await inputElement.waitFor({ state: "visible" });
     await inputElement.fill(value);
   };
-  
+
+  fileUpload = async (input: string, path: string) => {
+    const inputElement =
+      typeof input === "string" ? getPage().locator(input) : input;
+    await inputElement.waitFor({ state: "visible" });
+    await inputElement.setInputFiles(path);
+  };
 }
 
 export default new Utility();

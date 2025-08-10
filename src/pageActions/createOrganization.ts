@@ -4,19 +4,7 @@ import utility from "../utils/utility";
 
 class CreateOrganization {
   constructor() {}
-  login = async () => {
-    await utility.goToURL("https://sandbox.skillsmax.ai/");
 
-    await utility.fillText(
-      '//input[@placeholder="Email"]',
-      process.env.MY_MAIL
-    );
-    await utility.fillText(
-      '//input[@placeholder="Password"]',
-      process.env.MY_PASSWORD
-    );
-    await utility.click('//button[text()="Login"]');
-  };
 
   switchToOrganizationTab = async () => {
     await utility.click('//a//child::p[text()="Organization"]');

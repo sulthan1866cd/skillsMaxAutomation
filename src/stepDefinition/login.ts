@@ -37,6 +37,6 @@ When(
   }
 );
 
-Then("{string} message should be shown", async (message: string) => {
+Then("{string} message should be shown -login", async (message: string) => {
   await expect(utility.getElement(`//p[text()="${message}"]`)).toBeVisible();
 });

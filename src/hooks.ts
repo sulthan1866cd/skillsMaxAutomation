@@ -1,6 +1,13 @@
-import { AfterAll, BeforeAll, setDefaultTimeout } from "@cucumber/cucumber";
+import {
+  After,
+  AfterAll,
+  BeforeAll,
+  setDefaultTimeout,
+} from "@cucumber/cucumber";
 
-import { chromium, Browser, BrowserContext, Page } from "@playwright/test";
+import { chromium, Browser, Page } from "@playwright/test";
+import randomstring from "randomstring";
+
 setDefaultTimeout(60 * 1000);
 let page: Page;
 let browser: Browser;
@@ -16,8 +23,17 @@ BeforeAll(async () => {
   await page.setViewportSize({ width: 1500, height: 720 });
 });
 
+After(async ({ error }) => {
+  if (error) {
+    console.log(error);
+    await page.screenshot({
+      path: `test-results/screenshots/screenshot_${randomstring.generate()}.png`,
+    });
+  }
+});
+
 AfterAll(async () => {
-  // await browser.close();
+  await browser.close();
 });
 
 export const getPage = () => {

@@ -9,6 +9,7 @@
     "requireModule": ["ts-node/register"],
     "format": [
       "json:test-results/report.json"
-    ]
+    ],
+    "parallel":3
   }
 }
