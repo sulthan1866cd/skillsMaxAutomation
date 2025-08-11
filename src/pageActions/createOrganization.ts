@@ -1,53 +1,57 @@
 import assesmentLevels from "../interface/assesmentLevels.interface";
 import assessmentTypes from "../interface/assesmentTypes.interface";
 import utility from "../utils/utility";
+import createOrganizationPageObject from "../pageObjects/createOrganization";
 
-class CreateOrganization {
-  constructor() {}
-
-
+class CreateOrganizationPageAction {
+  constructor(){}
   switchToOrganizationTab = async () => {
-    await utility.click('//a//child::p[text()="Organization"]');
+    await utility.click(createOrganizationPageObject.organizationTabButton());
   };
 
   openCreateOrganizationSideBar = async () => {
-    await utility.click('//button[text()="Create Organization"]');
+    await utility.click(
+      createOrganizationPageObject.createOrganizationSidebarButton()
+    );
   };
 
   fillOrganizationName = async (organizationName: string) => {
     await utility.fillText(
-      '//input[@placeholder="Organisation Name"]',
+      createOrganizationPageObject.organizationNameField(),
       organizationName
     );
   };
 
   fillAddress = async (address: string) => {
-    await utility.fillText('//textarea[@name="address"]', address);
+    await utility.fillText(
+      createOrganizationPageObject.addressField(),
+      address
+    );
   };
 
   selectCountry = async (listIndex: number) => {
     await utility.selectDropdown(
-      '//input[@id="«r19»"]',
+      createOrganizationPageObject.selectCountryField(),
       `//li[@id="«r19»-option-${listIndex}"]`
     );
   };
 
   selectState = async (listIndex: number) => {
     await utility.selectDropdown(
-      '//input[@id="«r1c»"]',
+      createOrganizationPageObject.selectStateField(),
       `//li[@id="«r1c»-option-${listIndex}"]`
     );
   };
 
   selectCity = async (listIndex: number) => {
     await utility.selectDropdown(
-      '//input[@id="«r1g»"]',
+      createOrganizationPageObject.selectCityField(),
       `//li[@id="«r1g»-option-${listIndex}"]`
     );
   };
 
   fillPin = async (pincode: string) => {
-    await utility.fillText('//input[@placeholder="XXXXXX"]', pincode);
+    await utility.fillText(createOrganizationPageObject.pinField(), pincode);
   };
 
   checkLicensing = async (
@@ -88,8 +92,8 @@ class CreateOrganization {
   };
 
   clickCreateButton = async () => {
-    await utility.click('//button//child::p[text()="Create"]');
+    await utility.click(createOrganizationPageObject.createButton());
   };
 }
 
-export default new CreateOrganization();
+export default new CreateOrganizationPageAction();

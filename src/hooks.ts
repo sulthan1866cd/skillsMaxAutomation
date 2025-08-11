@@ -23,8 +23,8 @@ BeforeAll(async () => {
   await page.setViewportSize({ width: 1500, height: 720 });
 });
 
-After(async ({ error, pickle }) => {
-  if (error) {
+After(async ({ error, result, pickle }) => {
+  if (error || result.status === "FAILED") {
     console.log(error);
     await page.screenshot({
       path: `test-results/screenshots/${
