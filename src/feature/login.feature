@@ -22,18 +22,18 @@ Feature: login to skillsmax
       | "sulthn@gmail.in" | "qwerty" |
 
   @login
-  Scenario Outline: user leaves password field empty
+  Scenario Outline: user leaves any field empty
     Given user is in login page
     When user enters <value> in <field> field
     And user clicks login button
     Then "<other field> is required<dot>" message should be shown -login
 
     Examples:
-      | value          | field      | other field | dot |
-      | "wrongmail.in" | "Email"    | Password    | .   |
-      | "sulthn@gmail" | "Email"    | Password    | .   |
-      | "qwerty"       | "Password" | Email       |     |
-      | "password"     | "Password" | Email       |     |
+      | value               | field      | other field | dot |
+      | "wrongmail@mail.in" | "Email"    | Password    | .   |
+      | "sulthn@gmail.com"  | "Email"    | Password    | .   |
+      | "qwerty"            | "Password" | Email       |     |
+      | "password"          | "Password" | Email       |     |
     # email is required message dosent end with dot
 
   @login

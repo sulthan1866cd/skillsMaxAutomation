@@ -23,11 +23,13 @@ BeforeAll(async () => {
   await page.setViewportSize({ width: 1500, height: 720 });
 });
 
-After(async ({ error }) => {
+After(async ({ error, pickle }) => {
   if (error) {
     console.log(error);
     await page.screenshot({
-      path: `test-results/screenshots/screenshot_${randomstring.generate()}.png`,
+      path: `test-results/screenshots/${
+        pickle.name
+      }_${randomstring.generate()}.png`,
     });
   }
 });
