@@ -4,7 +4,7 @@ import createUser from "../pageActions/createUser";
 import { expect } from "@playwright/test";
 
 //give email as in asserts/user.csv"
-const email: string = "sul+4@example.com";
+const emails: string[] = ["sul+7@example.com","sul+8@example.com"];
 const orgName: string = "!";
 const csvFilePath: string = "asserts/user.csv";
 const csvWithDuplicateEmailPath: string = "asserts/csv-with-dup-emails.csv";
@@ -53,10 +53,12 @@ When("user clicks Confirm & Create button", async () => {
   await createUser.clickConfirmAndCreate();
 });
 Then("user should be added to users list", async () => {
-  await createUser.searchUsers(email);
-  const usernameListElemnt = utility.getElement(`//td[text()="${email}"]`);
-  await usernameListElemnt.waitFor({ state: "visible" });
-  await expect(usernameListElemnt).toBeVisible();
+  for (const email of emails) {
+    await createUser.searchUsers(email);
+    const usernameListElemnt = utility.getElement(`//td[text()="${email}"]`);
+    await usernameListElemnt.waitFor({ state: "visible" });
+    await expect(usernameListElemnt).toBeVisible();
+  }
 });
 
 Then(
