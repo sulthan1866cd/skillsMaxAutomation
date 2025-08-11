@@ -7,7 +7,8 @@
     "test:createOrg": "cucumber-js --tags='@createOrg'",
     "test:createUser": "cucumber-js --tags='@createUser'",
     "test": "cucumber-js",
-    "report": "ts-node htmlReport.ts"
+    "report": "ts-node htmlReport.ts",
+    "rerun":"cucumber-js -p rerun test-results/@rerun.txt"
   },
   "keywords": [],
   "author": "",

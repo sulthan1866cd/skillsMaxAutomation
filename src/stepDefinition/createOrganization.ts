@@ -2,7 +2,7 @@ import { Given, Then, When } from "@cucumber/cucumber";
 import { getPage } from "../hooks";
 import { expect } from "@playwright/test";
 import { configDotenv } from "dotenv";
-import createOrganization from "../pageActions/createOrganization";
+import createOrganizationPageAction from "../pageActions/createOrganization";
 import utility from "../utils/utility";
 import randomstring from "randomstring";
 import assesmentLevels from "../interface/assesmentLevels.interface";
@@ -31,14 +31,14 @@ const pin: string = randomstring.generate({ charset: "numeric", length: 6 });
 Given("user is in organization tab", async () => {
   await utility.login();
   console.log("redirected to dashboard page");
-  await createOrganization.switchToOrganizationTab();
+  await createOrganizationPageAction.switchToOrganizationTab();
   console.log("user in organization tab");
 });
 
 When(
   "user clicks Create Organization button to open create organization side bar",
   async () => {
-    await createOrganization.openCreateOrganizationSideBar();
+    await createOrganizationPageAction.openCreateOrganizationSideBar();
     console.log("in create organization sidebar");
   }
 );
@@ -55,22 +55,22 @@ When(
       | "City"
   ) => {
     if (field !== "Organisation Name")
-      await createOrganization.fillOrganizationName(organizationName);
-    if (field !== "Address") await createOrganization.fillAddress(address);
+      await createOrganizationPageAction.fillOrganizationName(organizationName);
+    if (field !== "Address") await createOrganizationPageAction.fillAddress(address);
     if (field !== "Country")
-      await createOrganization.selectCountry(countryIndex);
+      await createOrganizationPageAction.selectCountry(countryIndex);
     if (field !== "Country" && field !== "State")
-      await createOrganization.selectState(stateIndex);
+      await createOrganizationPageAction.selectState(stateIndex);
     if (field !== "Country" && field !== "State" && field !== "City")
-      await createOrganization.selectCity(cityIndex);
-    if (field !== "Pin Code") await createOrganization.fillPin(pin);
-    await createOrganization.fillAssessmentTypes(assesmentTypes);
-    await createOrganization.checkAssessmentLevels(assesmentLevels);
+      await createOrganizationPageAction.selectCity(cityIndex);
+    if (field !== "Pin Code") await createOrganizationPageAction.fillPin(pin);
+    await createOrganizationPageAction.fillAssessmentTypes(assesmentTypes);
+    await createOrganizationPageAction.checkAssessmentLevels(assesmentLevels);
   }
 );
 
 When("user clicks create button", async () => {
-  await createOrganization.clickCreateButton();
+  await createOrganizationPageAction.clickCreateButton();
 });
 
 Then("{string} message should be shown -createOrg", async (message: string) => {
@@ -78,26 +78,26 @@ Then("{string} message should be shown -createOrg", async (message: string) => {
 });
 
 When("user fills all the manditory fields", async () => {
-  await createOrganization.fillOrganizationName(organizationName);
-  await createOrganization.fillAddress(address);
-  await createOrganization.selectCountry(countryIndex);
-  await createOrganization.selectState(stateIndex);
-  await createOrganization.selectCity(cityIndex);
-  await createOrganization.fillPin(pin);
-  await createOrganization.fillAssessmentTypes(assesmentTypes);
-  await createOrganization.checkAssessmentLevels(assesmentLevels);
+  await createOrganizationPageAction.fillOrganizationName(organizationName);
+  await createOrganizationPageAction.fillAddress(address);
+  await createOrganizationPageAction.selectCountry(countryIndex);
+  await createOrganizationPageAction.selectState(stateIndex);
+  await createOrganizationPageAction.selectCity(cityIndex);
+  await createOrganizationPageAction.fillPin(pin);
+  await createOrganizationPageAction.fillAssessmentTypes(assesmentTypes);
+  await createOrganizationPageAction.checkAssessmentLevels(assesmentLevels);
 });
 
 When(
   "user check any Assessment Level checkbox and user fills other fields",
   async () => {
-    await createOrganization.fillOrganizationName(organizationName);
-    await createOrganization.fillAddress(address);
-    await createOrganization.selectCountry(countryIndex);
-    await createOrganization.selectState(stateIndex);
-    await createOrganization.selectCity(cityIndex);
-    await createOrganization.fillPin(pin);
-    await createOrganization.fillAssessmentTypes(assesmentTypes);
+    await createOrganizationPageAction.fillOrganizationName(organizationName);
+    await createOrganizationPageAction.fillAddress(address);
+    await createOrganizationPageAction.selectCountry(countryIndex);
+    await createOrganizationPageAction.selectState(stateIndex);
+    await createOrganizationPageAction.selectCity(cityIndex);
+    await createOrganizationPageAction.fillPin(pin);
+    await createOrganizationPageAction.fillAssessmentTypes(assesmentTypes);
   }
 );
 

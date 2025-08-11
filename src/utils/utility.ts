@@ -58,7 +58,7 @@ class Utility {
     await inputElement.fill(value);
   };
 
-  fileUpload = async (input: string, path: string) => {
+  fileUpload = async (input: string | Locator, path: string) => {
     const inputElement =
       typeof input === "string" ? getPage().locator(input) : input;
     await inputElement.waitFor({ state: "visible" });
