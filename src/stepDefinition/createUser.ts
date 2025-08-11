@@ -4,7 +4,7 @@ import createUserPageAction from "../pageActions/createUser";
 import { expect } from "@playwright/test";
 
 //give email as in asserts/user.csv"
-const emails: string[] = ["sul+7@example.com","sul+8@example.com"];
+const emails: string[] = ["sul+11@example.com","sul+12@example.com"];
 const orgName: string = "!";
 const csvFilePath: string = "asserts/user.csv";
 const csvWithDuplicateEmailPath: string = "asserts/csv-with-dup-emails.csv";

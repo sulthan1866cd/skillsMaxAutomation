@@ -19,6 +19,8 @@ npm run test:createOrg
 npm run test:createUser # make sure any email in `asserts/user.csv` is in `stepDefenition/createUser`
 # run all tests
 npm run test
+# rerun failed scenarios
+npm run rerun
 # generate html report
 npm run report
 ```
@@ -43,7 +45,7 @@ npm run report
 - unsuccessful organization creation without checking assessment levels
 
 ### Create Users
-- sucessful users creation
+- sucessful users creation `works when executed seperately`
 - unsucessful user creation with duplicates in email
 
 
